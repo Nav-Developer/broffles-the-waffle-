@@ -18,7 +18,6 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import StarIcon from "@mui/icons-material/Star";
 import assets from "@/assets";
 
 const LOGO_SRC = assets.images.logo;
@@ -47,7 +46,7 @@ function Logo({ size }: { size: number }) {
     >
       <Image
         src={LOGO_SRC}
-        alt="Dancing Chef"
+        alt="Broffles"
         fill
         priority
         sizes="80px"

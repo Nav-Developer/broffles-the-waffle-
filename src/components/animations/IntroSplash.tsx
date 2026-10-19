@@ -71,7 +71,7 @@ export default function IntroSplash() {
         variant="h4"
         sx={{ fontFamily: "var(--font-playfair)", textAlign: "center" }}
       >
-        Dancing Chef
+        Broffles Chef
       </Typography>
 
       <Button

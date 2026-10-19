@@ -1,14 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --maroon: #8e1b1b;
-  --red: #d2282e;
-  --gold: #f7d154;
-  --cream: #f5e1c0;
-  --ink: #1a0f0d;
+  --primary: #d93832; /* GBW red */
+  --secondary: #f2c94c; /* crown yellow */
+  --accent: #4fbdfb; /* active link blue */
+  --ink: #0a0a0a; /* menu black */
+  --paper: #ffffff;
+
+  /* old names, remapped so nothing breaks */
+  --maroon: #a82420;
+  --red: var(--primary);
+  --gold: var(--secondary);
+  --cream: #fff8ee;
 }
 
 @theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-paper: var(--paper);
   --color-maroon: var(--maroon);
   --color-brand-red: var(--red);
   --color-gold: var(--gold);
@@ -25,10 +35,10 @@ html {
 body {
   background-color: var(--cream);
   background-image: radial-gradient(
-    rgba(142, 27, 27, 0.07) 1px,
+    rgba(217, 56, 50, 0.07) 1px,
     transparent 1px
   );
   background-size: 22px 22px;
-  color: #2a1210;
+  color: var(--ink);
   font-family: var(--font-montserrat), sans-serif;
 }

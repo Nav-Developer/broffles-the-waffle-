@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Montserrat } from "next/font/google";
 import ThemeRegistry from "@/theme/ThemeRegistry";
-import IntroSplash from "@/components/animations/IntroSplash";
+// import IntroSplash from "@/components/animations/IntroSplash";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -13,7 +13,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Dancing Chef",
+  title: "Broffles",
   description: "Where every dish is a performance.",
 };
 
@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" className={`${bodoni.variable} ${montserrat.variable}`}>
       <body>
         <ThemeRegistry>
-          <IntroSplash />
+          {/* <IntroSplash /> */}
           <Navbar />
           <main>{children}</main>
           <Footer />

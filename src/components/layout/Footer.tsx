@@ -14,7 +14,7 @@ export default function Footer() {
       }}
     >
       <Typography variant="body2" sx={{ letterSpacing: "0.1em" }}>
-        © {new Date().getFullYear()} DANCING CHEF. ALL RIGHTS RESERVED.
+        © {new Date().getFullYear()} Broffles. ALL RIGHTS RESERVED.
       </Typography>
     </Box>
   );
