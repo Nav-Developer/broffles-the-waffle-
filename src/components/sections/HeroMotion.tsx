@@ -25,54 +25,57 @@ const BITS = [
   { x: "92%", y: "72%", size: 80, rot: -10, depth: 50, delay: 0.5 },
 ];
 
-// function WaffleBit1({ size, rot }: { size: number; rot: number }) {
+// function WaffleBit({ size, rot }: { size: number; rot: number }) {
 //   return (
-//     <svg
+//     <Image
+//       src={assets.images.waffle}
 //       width={size}
 //       height={size}
-//       viewBox="0 0 100 100"
-//       style={{ transform: `rotate(${rot}deg)` }}
-//     >
-//       <rect x="4" y="4" width="92" height="92" rx="24" fill="#d9944a" />
-//       {[28, 50, 72].map((p) => (
-//         <g key={p}>
-//           <line
-//             x1={p}
-//             y1="10"
-//             x2={p}
-//             y2="90"
-//             stroke="#8a4b1c"
-//             strokeWidth="5"
-//           />
-//           <line
-//             x1="10"
-//             y1={p}
-//             x2="90"
-//             y2={p}
-//             stroke="#8a4b1c"
-//             strokeWidth="5"
-//           />
-//         </g>
-//       ))}
-//     </svg>
+//       alt=""
+//       style={{
+//         transform: `rotate(${rot}deg)`,
+//         objectFit: "contain",
+//         mixBlendMode: "multiply",
+//       }}
+//     />
 //   );
 // }
 
-function WaffleBit({ size, rot }: { size: number; rot: number }) {
+// function WaffleOutBit({ size, rot }: { size: number; rot: number }) {
+//   return (
+//     <Image
+//       src={assets.images.waffle_out}
+//       width={size}
+//       height={size}
+//       alt=""
+//       style={{
+//         transform: `rotate(${rot}deg)`,
+//         objectFit: "contain",
+//         mixBlendMode: "multiply",
+//       }}
+//     />
+//   );
+// }
+function WaffleImg({
+  src,
+  size,
+}: {
+  src: typeof assets.images.waffle;
+  size: number;
+}) {
   return (
     <Image
-      src={assets.images.waffle}
+      src={src}
       width={size}
       height={size}
       alt=""
-      style={{
-        transform: `rotate(${rot}deg)`,
-        objectFit: "contain",
-        mixBlendMode: "multiply",
-      }}
+      priority
+      draggable={false}
+      style={{ width: "100%", height: "100%", objectFit: "contain" }}
     />
   );
 }
+
 function FloatingBit({
   b,
   mx,
@@ -84,8 +87,23 @@ function FloatingBit({
 }) {
   const x = useTransform(mx, [-0.5, 0.5], [-b.depth, b.depth]);
   const y = useTransform(my, [-0.5, 0.5], [-b.depth, b.depth]);
+  const [clicked, setClicked] = useState(false);
+
+  const fade = { duration: 0.6, ease: "easeInOut" as const };
+
   return (
-    <motion.div style={{ position: "absolute", left: b.x, top: b.y, x, y }}>
+    <motion.div
+      style={{
+        position: "absolute",
+        left: b.x,
+        top: b.y,
+        x,
+        y,
+        cursor: "pointer",
+        zIndex: 20,
+      }}
+      onClick={() => setClicked((p) => !p)}
+    >
       <motion.div
         animate={{ y: [0, -18, 0], rotate: [0, 8, -8, 0] }}
         transition={{
@@ -95,7 +113,59 @@ function FloatingBit({
           delay: b.delay,
         }}
       >
-        <WaffleBit size={b.size} rot={b.rot} />
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.92 }}
+          style={{
+            position: "relative",
+            width: b.size,
+            height: b.size,
+            rotate: b.rot,
+            perspective: 600,
+          }}
+        >
+          {/* <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={clicked ? "out" : "in"}
+              style={{ position: "absolute", inset: 0 }}
+              initial={{ rotateY: 90, opacity: 0 }}
+              animate={{ rotateY: 0, opacity: 1 }}
+              exit={{ rotateY: -90, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <WaffleImg
+                src={clicked ? assets.images.waffle_out : assets.images.waffle}
+                size={b.size}
+              />
+            </motion.div>
+          </AnimatePresence> */}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={clicked ? "out" : "in"}
+              style={{ position: "absolute", inset: 0 }}
+              initial={{ scale: 0.4, opacity: 0, y: 10, filter: "blur(6px)" }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                transition: { type: "spring", stiffness: 260, damping: 16 },
+              }}
+              exit={{
+                scale: 0.4,
+                opacity: 0,
+                y: -10,
+                filter: "blur(6px)",
+                transition: { duration: 0.18, ease: "easeIn" },
+              }}
+            >
+              <WaffleImg
+                src={clicked ? assets.images.waffle_out : assets.images.waffle}
+                size={b.size}
+              />
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
       </motion.div>
     </motion.div>
   );
