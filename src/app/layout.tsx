@@ -5,6 +5,7 @@ import ThemeRegistry from "@/theme/ThemeRegistry";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
+import StickyCTA from "@/components/layout/StickyCTA";
 
 const bodoni = Bodoni_Moda({ subsets: ["latin"], variable: "--font-bodoni" });
 const montserrat = Montserrat({
@@ -30,6 +31,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <StickyCTA />
         </ThemeRegistry>
       </body>
     </html>
