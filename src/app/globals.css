@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --maroon: #8e1b1b;
+  --red: #d2282e;
+  --gold: #f7d154;
+  --cream: #f5e1c0;
+  --ink: #1a0f0d;
+}
+
+@theme inline {
+  --color-maroon: var(--maroon);
+  --color-brand-red: var(--red);
+  --color-gold: var(--gold);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-bodoni);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  background-image: radial-gradient(
+    rgba(142, 27, 27, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  color: #2a1210;
+  font-family: var(--font-montserrat), sans-serif;
+}
